@@ -45,14 +45,13 @@ export class XmindService {
   }
 
   ReorganizeTopic(topic: baseTopic | rootTopic): baseTopic | rootTopic {
-    debugger
     const defaultWidth = this.getDefaultWidth();
     const defaultHeight = this.getDefaultHeight();
     const defaultSpace = this.getDefaultSpace();
-
+    let currentPosition = new position(0, 0);
     topic.setWidth(defaultWidth);
     topic.setHeight(defaultHeight);
-    let currentPosition = new position(0, 0);
+    topic.SetPosition(currentPosition);
     let counter : number = 0;
 
     topic.getChildren().forEach(item => {
@@ -69,16 +68,21 @@ export class XmindService {
   }
 
   getDefaultSpace() {
-    return 50;
+    return 5;
   }
   getDefaultHeight() {
-    return 100;
+    return 10;
   }
   getDefaultWidth() {
-    return 150;
+    return 15;
   }
   getChildren(): baseTopic[] {
+
     return this.rootTopic.children;
+  }
+  getOrganizedTopics(): baseTopic[] {
+    this.ReorganizeTopic(this.rootTopic);
+    return  [this.rootTopic, ...this.rootTopic.children];
   }
   getChildrenProperties(): { title:string, x: number, y: number, width: number, height: number }[] {
     return this.rootTopic.children.map(child => ({

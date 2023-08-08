@@ -18,13 +18,22 @@ export class AppComponent implements AfterViewInit {
   ngAfterViewInit() {
     const service = new XmindService();
     service.createNewFile();
-    const child = service.getChildrenProperties();
-    console.log(child);
+    const children = service.getOrganizedTopics();//service.getChildrenProperties();
+    console.log(children);
+    const dataset = children.map(child => ({
+      title: child.title,
+      x: child.position.x,
+      y: child.position.y,
+      width: child.width,
+      height: child.height
+    }));
 
+
+    console.log(dataset);
     const canvas = this.canvasRef.nativeElement;
     const ctx = canvas.getContext('2d');
-    if (ctx && child) {
-      this.drawOnCanvas(ctx, child);
+    if (ctx && dataset) {
+      this.drawOnCanvas(ctx, dataset);
     }
   }
   drawOnCanvas(
