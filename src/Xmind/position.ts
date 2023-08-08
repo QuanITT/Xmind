@@ -5,6 +5,6 @@ export class position {
 
   constructor(x: number = 0, y: number = 0) {
     this.x = x;
-    this.y = y ;
+    this.y = y;
   }
 }

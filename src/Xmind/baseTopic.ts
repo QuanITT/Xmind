@@ -12,8 +12,8 @@ export class baseTopic {
   position!: position;
   width!: number;
   height!: number;
-  private children: baseTopic[] = [];
-  private relationships: baseTopic[] = [];
+  public children: baseTopic[] = [];
+  public relationships: baseTopic[] = [];
   SetPosition(position: position) {
     //this.point = new position(this.point.x??0 + space, this.point.y??0 + space);
     this.position = position;
@@ -29,6 +29,8 @@ export class baseTopic {
     this.id = this.createGuid().toString();
     this.title = title;
     this.position = new position();
+    this.width = 100;
+    this.height = 150;
   }
   deleteTopicIdSet(idSet: Array<string>) {
     const topics: baseTopic[] = [];

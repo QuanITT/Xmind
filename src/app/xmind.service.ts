@@ -77,6 +77,19 @@ export class XmindService {
   getDefaultWidth() {
     return 150;
   }
+  getChildren(): baseTopic[] {
+    return this.rootTopic.children;
+  }
+  getChildrenProperties(): { title:string, x: number, y: number, width: number, height: number }[] {
+    return this.rootTopic.children.map(child => ({
+      title: child.title,
+      x: child.position.x,
+      y: child.position.y,
+      width: child.width,
+      height: child.height
+    }));
+  }
+
 
   // drawChildTopics(children: baseTopic[]) {
   //   if (children == null || children.length == 0) return;

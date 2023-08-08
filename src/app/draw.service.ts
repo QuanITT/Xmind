@@ -7,18 +7,12 @@ import { rootTopic } from 'src/Xmind/rootTopic';
 })
 
 export class DrawService {
-  root: rootTopic; ;
+  root: rootTopic;
 
    drawRectangle(topic: baseTopic) {
-  //   var ctx = canvas.getContext('2d');
-  //   if (ctx==null) return;
-  //   ctx.strokeStyle = 'black';
-  //   ctx.lineWidth = 1;
-  //   ctx.strokeRect(
-  //     this.topic.position.x,
-  //     this.topic.position.y,
-  //     this.topic.width,
-  //     this.topic.height
+    // this.ctx.strokeStyle = "black";
+    // this.ctx.lineWidth = 1;
+    // this.ctx.strokeRect(topic.position.x, topic.position.y, topic.width, topic.height);
 
    }
 
