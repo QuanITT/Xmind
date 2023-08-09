@@ -23,6 +23,7 @@ export class XmindService {
     this.rootTopic.createTopic(new baseTopic('topic2'));
     this.rootTopic.createTopic(new baseTopic('topic3'));
     this.rootTopic.createTopic(new baseTopic('topic4'));
+    this.rootTopic.createTopic(new baseTopic('topic5'));
   }
 
   public OpenFile(filename: string): rootTopic {

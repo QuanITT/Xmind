@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { XmindService } from './xmind.service';
 import { DrawService } from './draw.service';
 import { rootTopic } from 'src/Xmind/rootTopic';
@@ -9,47 +9,38 @@ import { baseTopic } from 'src/Xmind/baseTopic';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements AfterViewInit {
-  @ViewChild('canvasElement', { static: true })
-  canvasRef!: ElementRef<HTMLCanvasElement>;
-  title = 'xmind';
-  serviceData: any;
-  constructor() {}
-  ngAfterViewInit() {
-    const service = new XmindService();
-    service.createNewFile();
-    const children = service.getOrganizedTopics();//service.getChildrenProperties();
-    console.log(children);
-    const dataset = children.map(child => ({
-      title: child.title,
-      x: child.position.x,
-      y: child.position.y,
-      width: child.width,
-      height: child.height
+export class AppComponent implements OnInit {
+  view: [number, number] = [1500, 1500];
+  nodes: any[] = [];
+  links: any[] = [];
+  // @ViewChild('canvasElement', { static: true })
+  // canvasRef!: ElementRef<HTMLCanvasElement>;
+  // title = 'xmind';
+  // serviceData: any;
+  constructor(private xmindService: XmindService) {}
+
+  ngOnInit(): void {
+    this.xmindService.createNewFile();
+    const children = this.xmindService.getOrganizedTopics();
+    this.nodes = children.map(child => ({
+      id: child.id,
+      label: child.title,
+      color: 'lightblue',
+      dimension: { width: child.width, height: child.height },
+      position: { x: child.position.x, y: child.position.y },
     }));
+    console.log(this.nodes);
 
 
-    console.log(dataset);
-    const canvas = this.canvasRef.nativeElement;
-    const ctx = canvas.getContext('2d');
-    if (ctx && dataset) {
-      this.drawOnCanvas(ctx, dataset);
-    }
-  }
-  drawOnCanvas(
-    ctx: CanvasRenderingContext2D,
-    child: {
-      title: string;
-      x: number;
-      y: number;
-      width: number;
-      height: number;
-    }[]
-  ) {
-    child.forEach((e) => {
-      ctx.strokeRect(e.x, e.y, e.width, e.height);
-      ctx.fillText(e.title, 10, 10);
-
+    //links tới các child
+    children.forEach(parent => {
+      parent.children.forEach(child => {
+        this.links.push({
+          source: parent.id,
+          target: child.id,
+        });
+      });
     });
+
   }
 }

@@ -3,3 +3,7 @@ canvas {
   height: 1004px;
 
 }
+svg rect {
+  stroke: black;
+  stroke-width: 2;
+}

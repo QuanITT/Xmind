@@ -1,4 +1,13 @@
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet>
 <div class="container">
 <canvas #canvasElement></canvas>
 </div>
+ -->
+ <ngx-graph [view]="view" [nodes]="nodes" [links]="links">
+  <ng-template #nodeTemplate let-node>
+    <svg:g>
+      <svg:rect [attr.width]="60" [attr.height]="40" [attr.fill]="node.color"></svg:rect>
+      <svg:text alignment-baseline="middle" text-anchor="middle" x="30" y="20">{{ node.label }}</svg:text>
+    </svg:g>
+  </ng-template>
+</ngx-graph>
