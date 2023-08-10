@@ -4,14 +4,19 @@ import { rootTopic } from 'src/Xmind/rootTopic';
 import { DrawService } from './draw.service';
 import { isNgTemplate } from '@angular/compiler';
 import { position } from 'src/Xmind/position';
+import { topic } from 'src/Xmind/topic';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class XmindService {
+  createNewTopic(): void {
+    const topic1 = new baseTopic('topic');
 
-  private drawService!: DrawService;
+    this.rootTopic.children.push(topic1);
+  }
+
   private rootTopic!: rootTopic;
 
   constructor() {
@@ -19,11 +24,33 @@ export class XmindService {
 
   public createNewFile(): void {
     this.rootTopic = new rootTopic('root');
-    this.rootTopic.createTopic(new baseTopic('topic1'));
-    this.rootTopic.createTopic(new baseTopic('topic2'));
-    this.rootTopic.createTopic(new baseTopic('topic3'));
-    this.rootTopic.createTopic(new baseTopic('topic4'));
-    this.rootTopic.createTopic(new baseTopic('topic5'));
+    const topic1 = new baseTopic('topic1');
+    const topic2 = new baseTopic('topic2');
+    const topic3= new baseTopic('topic3');
+    const topic4 = new baseTopic('topic4');
+    const topic5 = new baseTopic('topic5');
+    this.rootTopic.createTopic(topic1);
+    this.rootTopic.createTopic(topic2);
+    this.rootTopic.createTopic(topic3);
+    this.rootTopic.createTopic(topic4);
+    this.rootTopic.createTopic(topic5);
+
+
+    const subtopic1 = new baseTopic('subtopic1');
+    const subtopic2 = new baseTopic('subtopic2');
+    const subtopic0 = new baseTopic('subtopic3');
+
+    const subtopic3 = new baseTopic('subtopic1');
+    const subtopic4 = new baseTopic('subtopic2');
+
+    topic1.createTopic(subtopic1);
+    topic1.createTopic(subtopic2);
+    topic1.createTopic(subtopic0);
+
+    topic2.createTopic(subtopic3);
+    topic2.createTopic(subtopic4);
+
+
   }
 
   public OpenFile(filename: string): rootTopic {

@@ -5,8 +5,6 @@ import { Relationship } from './Relationship';
 import { position } from './position';
 
 export class baseTopic {
-
-
   id: string;
   title: string;
   position!: position;

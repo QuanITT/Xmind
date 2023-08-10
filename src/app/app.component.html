@@ -3,11 +3,22 @@
 <canvas #canvasElement></canvas>
 </div>
  -->
- <ngx-graph [view]="view" [nodes]="nodes" [links]="links">
-  <ng-template #nodeTemplate let-node>
-    <svg:g>
-      <svg:rect [attr.width]="60" [attr.height]="40" [attr.fill]="node.color"></svg:rect>
-      <svg:text alignment-baseline="middle" text-anchor="middle" x="30" y="20">{{ node.label }}</svg:text>
-    </svg:g>
-  </ng-template>
+ <button (click)="CreateNew()" type="button">Click</button>
+ <ngx-graph
+ [view]="view"
+ [nodes]="nodes"
+ [links]="links"
+>
+ <ng-template #nodeTemplate let-node>
+   <svg:g >
+     <svg:rect [attr.width]="60" [attr.height]="40" [attr.fill]="node.color"></svg:rect>
+     <svg:text alignment-baseline="middle" text-anchor="middle" x="30" y="20">{{ node.label }}</svg:text>
+
+     <!-- Loop through children nodes -->
+     <svg:g *ngFor="let childNode of node.children">
+       <svg:rect [attr.width]="60" [attr.height]="40" [attr.fill]="childNode.color"></svg:rect>
+       <svg:text alignment-baseline="middle" text-anchor="middle" x="30" y="20">{{ childNode.label }}</svg:text>
+     </svg:g>
+   </svg:g>
+ </ng-template>
 </ngx-graph>

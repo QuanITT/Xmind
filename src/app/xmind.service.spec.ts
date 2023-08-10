@@ -7,9 +7,8 @@ import { subtopic } from 'src/Xmind/subtopic';
 import { baseTopic } from 'src/Xmind/baseTopic';
 import { Relationship } from 'src/Xmind/Relationship';
 import { XmindService } from './xmind.service';
-import { DrawService } from './draw.service';
 
-describe('Xmind Service', () => {
+describe('Xmind Service', () => {  
   it('Should create new file', () => {
     const root = new rootTopic('RootTopic');
     root.createTopic(new topic('Child1'));
